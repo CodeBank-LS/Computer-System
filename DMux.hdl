@@ -4,7 +4,7 @@
 // File name: projects/01/DMux.hdl
 
 /**
- * Demultiplexor:
+ * DMux:
  * {a, b} = {in, 0} if sel == 0
  *          {0, in} if sel == 1
  */
@@ -15,9 +15,7 @@ CHIP DMux {
 
     PARTS:
     // Put your code here:
-Nand(a=sel,b=sel,out=w1);
-Nand(a=w1,b=in,out=w2);
-nand(a=sel,b=in,out=w3);
-Nand(a=w2,b=w2,out=a);
-Nand(a=w3,b=w3,out=b);
+Not(in=sel,in=sel,out=w1);
+And(a=w1,b=in,out=a);
+And(a=in,b=sel,out=b);
 }

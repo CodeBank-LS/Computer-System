@@ -1,0 +1,37 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Or8Way.hdl
+
+/**
+ * 8-way Or: 
+ * out = (in[0] or in[1] or ... or in[7])
+ */
+
+CHIP Or8Way {
+    IN in[8];
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+//first layer: 4* 2x1 OR
+//Or(a=in[0],b=in[1],out=o1);Using 3 Nand gates to build one OR gate
+
+Nand(a=in[0],b=in[0],out=w01);
+Nand(a=in[1],b=in[1],out=w02);
+Nand(a=w01,b=w02,out=w11);
+Nand(a=in[2],b=in[2],out=w03);
+Nand(a=in[3],b=in[3],out=w04);
+Nand(a=w03,b=w04,out=w12);
+Nand(a=in[4],b=in[4],out=w05);
+Nand(a=in[5],b=in[5],out=w06);
+Nand(a=w05,b=w06,out=w13);
+Nand(a=in[6],b=in[6],out=w07);
+Nand(a=in[7],b=in[7],out=w08);
+Nand(a=w07,b=w08,out=w14);
+//second Layer:2* 2x1 OR
+Or(a=w11,b=w12,out=v1);
+Or(a=w13,b=w14,out=v2);
+//third layer, only one OR
+Or(a=v1,b=v2,out=out);
+}
